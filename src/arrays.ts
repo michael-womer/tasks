@@ -74,7 +74,10 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    return addends.length === 0 ? "0=0" : 
+        addends.reduce((sum:number, num:number):number => sum+num, 0).toString() + "=" +
+        addends.join("+")
+    ;
 }
 
 /**
