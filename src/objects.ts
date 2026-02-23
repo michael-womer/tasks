@@ -31,7 +31,7 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    return question.type === "short_answer_question" ? true : question.options.some((question:string):boolean => answer === question);
+    return question.type === "short_answer_question" ? true : question.options.some((option:string):boolean => answer === option);
 }
 
 /**
@@ -62,7 +62,10 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+
+    return "# " + question.name + "\n" + question.body + (question.type === "multiple_choice_question" ? question.options.map((option:string):string => 
+        {return "\n- " + option}
+).join("") : "");
 }
 
 /**
