@@ -6,7 +6,9 @@ import { Question, QuestionType } from "./interfaces/question";
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    return [];
+    return questions.filter((question:Question):boolean => question.published).map((question:Question):Question => {
+        return {... question, options:[... question.options]};
+    });
 }
 
 /**
@@ -15,7 +17,9 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [];
+    return questions.filter((question:Question):boolean => !(question.body.length === 0 && question.expected.length === 0 && question.options.length === 0)).map((question:Question):Question => {
+        return {... question, options:[... question.options]};
+    });
 }
 
 /***
@@ -26,7 +30,8 @@ export function findQuestion(
     questions: Question[],
     id: number
 ): Question | null {
-    return null;
+    const res:number = questions.findIndex((question:Question):boolean => question.id === id)
+    return res === -1 ? null : {... questions[res], options:[... questions[res].options]};
 }
 
 /**
@@ -34,7 +39,9 @@ export function findQuestion(
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    return [];
+    return questions.filter((question:Question):boolean => !(question.id === id)).map((question:Question):Question => {
+        return {... question, options:[... question.options]};
+    });
 }
 
 /***
@@ -42,7 +49,7 @@ export function removeQuestion(questions: Question[], id: number): Question[] {
  * questions, as an array.
  */
 export function getNames(questions: Question[]): string[] {
-    return [];
+    return questions.map((question:Question):string => question.name);
 }
 
 /***
