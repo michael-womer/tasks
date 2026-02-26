@@ -116,7 +116,8 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    const lengthOnlySAQ:number = questions.filter((question:Question):boolean => question.type === "short_answer_question").length
+    return questions.length === lengthOnlySAQ || lengthOnlySAQ === 0;
 }
 
 /***
