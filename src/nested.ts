@@ -1,6 +1,6 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion } from "./objects";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -179,8 +179,9 @@ export function changeQuestionTypeById(
  * can make it simpler! Break down complicated tasks into little pieces.
  */
 
+//helper function to replace option in options with s at given index 
 //can assume index != -1 here
-function insertNewOption(s:string, index:number, options:string[]):string[] {
+function replaceOption(s:string, index:number, options:string[]):string[] {
     const optionsDuplicate = [... options];
     optionsDuplicate.splice(index, 1, s);
     return optionsDuplicate;
@@ -196,7 +197,7 @@ export function editOption(
             return question.id !== targetId ? {... question, options:[... question.options]} :
             (
                 targetOptionIndex === -1 ? {... question, options:[... question.options, newOption]} :
-                {... question, options:insertNewOption(newOption, targetOptionIndex, question.options)}
+                {... question, options:replaceOption(newOption, targetOptionIndex, question.options)}
             )
 
         }
@@ -214,5 +215,10 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    const duplicateQuestions = questions.map((question:Question):Question => {return {... question, options:[... question.options]}});
+    const targetIndex = questions.findIndex((question:Question):boolean => targetId === question.id);
+    
+    duplicateQuestions.splice(targetIndex + 1, 0, duplicateQuestion(newId, questions[targetIndex]));
+
+    return duplicateQuestions;
 }
