@@ -178,13 +178,29 @@ export function changeQuestionTypeById(
  * Remember, if a function starts getting too complicated, think about how a helper function
  * can make it simpler! Break down complicated tasks into little pieces.
  */
+
+//can assume index != -1 here
+function insertNewOption(s:string, index:number, options:string[]):string[] {
+    const optionsDuplicate = [... options];
+    optionsDuplicate.splice(index, 1, s);
+    return optionsDuplicate;
+}
 export function editOption(
     questions: Question[],
     targetId: number,
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    return questions.map(
+        (question:Question):Question => {
+            return question.id !== targetId ? {... question, options:[... question.options]} :
+            (
+                targetOptionIndex === -1 ? {... question, options:[... question.options, newOption]} :
+                {... question, options:insertNewOption(newOption, targetOptionIndex, question.options)}
+            )
+
+        }
+    );
 }
 
 /***
