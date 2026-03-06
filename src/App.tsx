@@ -18,6 +18,8 @@ function App(): React.JSX.Element {
             <RevealAnswer></RevealAnswer>
             <hr/>
             <ChangeType></ChangeType>
+            <hr/>
+            <StartAttempt></StartAttempt>
             <p>
                 Edit <code>src/App.tsx</code> and save. This page will
                 automatically reload.
