@@ -16,6 +16,8 @@ function App(): React.JSX.Element {
             <Counter></Counter>
             <hr/>
             <RevealAnswer></RevealAnswer>
+            <hr/>
+            <ChangeType></ChangeType>
             <p>
                 Edit <code>src/App.tsx</code> and save. This page will
                 automatically reload.
