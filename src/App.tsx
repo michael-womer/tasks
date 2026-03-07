@@ -22,6 +22,8 @@ function App(): React.JSX.Element {
             <StartAttempt></StartAttempt>
             <hr/>
             <TwoDice></TwoDice>
+            <hr/>
+            <CycleHoliday></CycleHoliday>
             <p>
                 Edit <code>src/App.tsx</code> and save. This page will
                 automatically reload.
